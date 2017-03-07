@@ -1,26 +1,24 @@
-{{#if_eq build "standalone"}}
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-{{/if_eq}}
-import Vue from 'vue'{{#if_eq lintConfig "airbnb"}};{{/if_eq}}
-import App from './App'{{#if_eq lintConfig "airbnb"}};{{/if_eq}}
-{{#router}}
-import router from './router'{{#if_eq lintConfig "airbnb"}};{{/if_eq}}
-{{/router}}
+import 'babel-polyfill'
+import Vue from 'vue'
+import mofang from 'mofang5.0-vue'
+import 'mofang5.0-vue/dist/mofang.css'
+import App from './App.vue'
+import fastclick from 'fastclick'
 
-Vue.config.productionTip = false{{#if_eq lintConfig "airbnb"}};{{/if_eq}}
+// TODO 需要使用 vConsole 的同学请打开注释即可
+/* eslint-disable no-unused-vars */
+// import vConsole from 'vconsole'
+
+import 'common/stylus/index.styl'
+
+Vue.use(mofang)
+
+fastclick.attach(document.body)
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  {{#router}}
-  router,
-  {{/router}}
-  {{#if_eq build "runtime"}}
-  render: h => h(App){{#if_eq lintConfig "airbnb"}},{{/if_eq}}
-  {{/if_eq}}
-  {{#if_eq build "standalone"}}
-  template: '<App/>',
-  components: { App }{{#if_eq lintConfig "airbnb"}},{{/if_eq}}
-  {{/if_eq}}
-}){{#if_eq lintConfig "airbnb"}};{{/if_eq}}
+  render: h => h(App)
+})
